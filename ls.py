@@ -2,33 +2,6 @@ import turtle
 import re
 import ast
 
-#turtle.speed(500)
-
-#rules = {'F':'FLFRRFLF'}
-rulesstr = input("Rules(1:11, 0:1[0]0): ")
-if rulesstr == '':
-	rules = {'1':'11', '0':'1[0]0'}
-else:
-	rules = ast.literal_eval('{' + re.sub("([A-Za-z0-9\[\]]+):([A-Za-z0-9\[\]]+)", r'"\1":"\2"', rulesstr) + '}')
-iterations = input("Iterations (4): ")
-if iterations == '':
-	iterations = '4'
-iterations = int(iterations)
-angle = input("Angle(45): ")
-if angle == '':
-	angle = '45'
-angle = int(angle)
-distance = input("Distance (20): ")
-if distance == '':
-	distance = '20'
-distance = int(distance)
-
-
-
-#{'1':'11', '0':'1[0]0'}
-
-stack = []
-
 def apply_rules(axiom):
 	for i in range(iterations):
 		for key in rules:
@@ -57,6 +30,27 @@ def draw(M):
 			t.pd()
 		if m == '0' or m == '1': # draw a line segment ending in a leaf
 			t.forward(distance)
+
+#rules = {'F':'FLFRRFLF'}
+rulesstr = input("Rules(1:11, 0:1[0]0): ")
+if rulesstr == '':
+	rules = {'1':'11', '0':'1[0]0'}
+else:
+	rules = ast.literal_eval('{' + re.sub("([A-Za-z0-9\[\]]+):([A-Za-z0-9\[\]]+)", r'"\1":"\2"', rulesstr) + '}')
+iterations = input("Iterations (4): ")
+if iterations == '':
+	iterations = '4'
+iterations = int(iterations)
+angle = input("Angle(45): ")
+if angle == '':
+	angle = '45'
+angle = int(angle)
+distance = input("Distance (20): ")
+if distance == '':
+	distance = '20'
+distance = int(distance)
+
+stack = []
 
 t = turtle.Turtle()
 M = apply_rules("0")
