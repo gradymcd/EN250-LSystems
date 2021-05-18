@@ -5,11 +5,11 @@ import ast
 #turtle.speed(500)
 
 #rules = {'F':'FLFRRFLF'}
-rulesstr = input("Rules('1':'11', '0':'1[0]0): ")
+rulesstr = input("Rules(1:11, 0:1[0]0): ")
 if rulesstr == '':
 	rules = {'1':'11', '0':'1[0]0'}
 else:
-	rules = ast.literal_eval('{' + re.sub("([A-Za-z0-9]+):([A-Za-z0-9]+)", r'"\1":"\2"', rulesstr) + '}')
+	rules = ast.literal_eval('{' + re.sub("([A-Za-z0-9\[\]]+):([A-Za-z0-9\[\]]+)", r'"\1":"\2"', rulesstr) + '}')
 iterations = input("Iterations (4): ")
 if iterations == '':
 	iterations = '4'
