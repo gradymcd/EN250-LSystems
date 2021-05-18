@@ -10,8 +10,12 @@ def apply_rules(axiom):
 
 def draw(M):
 	for m in M:
-		if m == 'F' or m == 'G':
+		if m == 'F' or m == 'G' or m == 'A':
 			t.forward(distance)
+		if m == 'M':
+			t.pu()
+			t.forward(distance)
+			t.pd()
 		if m == 'B':
 			t.backward(distance)
 		if m == 'L' or m == '+':
@@ -30,13 +34,14 @@ def draw(M):
 			t.pd()
 		if m == '0' or m == '1': # draw a line segment ending in a leaf
 			t.forward(distance)
+		
 
 #rules = {'F':'FLFRRFLF'}
 rulesstr = input("Rules(1:11, 0:1[+0]-0): ")
 if rulesstr == '':
 	rules = {'1':'11', '0':'1[+0]-0'}
 else:
-	rules = ast.literal_eval('{' + re.sub("([A-Za-z0-9\[\]\-\+]+):([A-Za-z0-9\[\]\-\+]+)", r'"\1":"\2"', rulesstr) + '}')
+	rules = ast.literal_eval('{' + re.sub("([A-Za-z0-9\[\]\-\+\(\)]+):([A-Za-z0-9\[\]\-\+\]+)", r'"\1":"\2"', rulesstr) + '}')
 print(rules)
 iterations = input("Iterations (4): ")
 if iterations == '':
@@ -45,7 +50,7 @@ iterations = int(iterations)
 angle = input("Angle(45): ")
 if angle == '':
 	angle = '45'
-angle = int(angle)
+angle = float(angle)
 distance = input("Distance (20): ")
 if distance == '':
 	distance = '20'
@@ -56,7 +61,7 @@ if axiom == '':
 sab = input("Start at bottom instead of center (y): ")
 if sab == '':
 	sab = 'y'
-
+#0:0[-FFF][+FFF]F0,1:1F0[+1][-1]
 stack = []
 
 t = turtle.Turtle()
