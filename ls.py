@@ -1,12 +1,32 @@
 import turtle
+import re
+import ast
 
 #turtle.speed(500)
 
 #rules = {'F':'FLFRRFLF'}
-rules = {'1':'11', '0':'1[0]0'}
-iterations = 6
-distance = 10
-angle = 45
+rulesstr = input("Rules('1':'11', '0':'1[0]0): ")
+if rulesstr == '':
+	rules = {'1':'11', '0':'1[0]0'}
+else:
+	rules = ast.literal_eval('{' + re.sub("([A-Za-z0-9]+):([A-Za-z0-9]+)", r'"\1":"\2"', rulesstr) + '}')
+iterations = input("Iterations (4): ")
+if iterations == '':
+	iterations = '4'
+iterations = int(iterations)
+angle = input("Angle(45): ")
+if angle == '':
+	angle = '45'
+angle = int(angle)
+distance = input("Distance (20): ")
+if distance == '':
+	distance = '20'
+distance = int(distance)
+
+
+
+#{'1':'11', '0':'1[0]0'}
+
 stack = []
 
 def apply_rules(axiom):
@@ -40,11 +60,11 @@ def draw(M):
 
 t = turtle.Turtle()
 M = apply_rules("0")
-print(M)
+print("Result string: ", M)
 
 t.pu()
 t.left(90)
-t.back(400)
+t.back(512)
 t.pd()
 t.speed(10)
 
